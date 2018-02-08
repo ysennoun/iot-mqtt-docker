@@ -28,8 +28,8 @@ RUN mkdir -p /usr/bin/java/
 RUN mv jdk1.8.0_161 /usr/bin/java/
 RUN rm jdk-8u161-linux-x64.tar.gz
 RUN chown -R root:root /usr/bin/java/jdk1.8.0_161/
-ENV export JAVA_HOME=/usr/bin/java/jdk1.8.0_161
-ENV export PATH=$PATH:/usr/bin/java/jdk1.8.0_161/bin
+ENV JAVA_HOME=/usr/bin/java/jdk1.8.0_161
+ENV PATH=$PATH:/usr/bin/java/jdk1.8.0_161/bin
 RUN java -version
 
 # Install EMQTT

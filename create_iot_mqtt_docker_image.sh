@@ -5,8 +5,8 @@
 # -----------------------------------------------------------------------------
 
 cmd=$(docker images | grep iot-mqtt-docker-image:0.0.1)
-[ -z "${cmd}" ] && echo "Image already created"
-[ -z "${cmd}" ] && docker build -tag iot-mqtt-docker-image:0.0.1 docker-files/. && echo "Image created"
+[ ! -z "${cmd}" ] && echo "Image already created"
+[ -z "${cmd}" ] && docker build -t iot-mqtt-docker-image:0.0.1 docker-files/. && echo "Image created"
 
 
 
