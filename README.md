@@ -85,6 +85,7 @@ on subscriber
 	/usr/share/kibana/bin/kibana &
 	
 On your local desktop, open a browser and go to 
+
 	192.168.1.21:5601
 
 
