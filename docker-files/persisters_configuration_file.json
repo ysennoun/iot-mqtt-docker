@@ -1,0 +1,12 @@
+{
+   "persisters":[
+      {
+         "type":"elasticsearch",
+         "brokers":"subscriber:9200",
+         "index":"iot_data_test_index"
+      },
+      {
+         "type":"console"
+      }
+   ]
+}

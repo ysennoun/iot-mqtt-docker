@@ -37,9 +37,6 @@ RUN wget emqtt.io/downloads/latest/centos7-rpm
 RUN rpm -ivh centos7-rpm
 RUN rm centos7-rpm
 
-# Expose Port
-EXPOSE 1883
-
 # Copy files
 RUN mkdir -p /home/jars
 COPY modify_emq_conf_file.sh /home/
@@ -60,6 +57,7 @@ RUN echo "server.host: 0.0.0.0" >> /etc/kibana/kibana.yml
 RUN echo "server.port: 5601" >> /etc/kibana/kibana.yml
 
 # Expose ports
+EXPOSE 1883
 EXPOSE 5601
 EXPOSE 9200
 EXPOSE 9300
