@@ -12,7 +12,7 @@ The project is composed of :
 - run_publisher_container.sh
 - run_subscriber_container.sh
 - docker-files
-  - Dockerfiles
+  - Dockerfile
   - modify_emq_conf_file.sh
   - publisher.sh
   - subscriber.sh
@@ -84,6 +84,7 @@ on subscriber
 
 	/usr/share/kibana/bin/kibana &
 	
-On your local desktop, open a browser and go to 192.168.1.21:5601
+On your local desktop, open a browser and go to 
+	192.168.1.21:5601
 
 
