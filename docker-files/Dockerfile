@@ -45,9 +45,12 @@ COPY subscriber.sh /home/
 COPY jars/* /home/jars/
 
 # Install Elasticsearch
-RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.0.rpm
-RUN rpm -ivh elasticsearch-6.2.0.rpm
-RUN rm elasticsearch-6.2.0.rpm
+RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.1.tar.gz
+RUN useradd -ms /bin/bash elasticuser
+RUN tar -xzf elasticsearch-6.2.1.tar.gz
+RUN mv elasticsearch-6.2.1/ /home/elasticuser/elasticsearch
+RUN chown -R elasticuser:elasticuser /home/elasticuser/elasticsearch/
+RUN rm elasticsearch-6.2.1.tar.gz
 
 # Install Kibana
 RUN wget https://artifacts.elastic.co/downloads/kibana/kibana-6.2.0-x86_64.rpm

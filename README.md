@@ -78,6 +78,17 @@ On subscriber
 	/usr/share/elasticsearch/bin/elasticsearch &
 	sh subscriber.sh tcp://s1-emqtt-io:1883 iot_data_test persisters_configuration_file.json
 
+## Elasticsearch
+
+On subscriber 
+
+	su - elasticuser
+	export JAVA_HOME=/usr/bin/java/jdk1.8.0_161
+	./elasticsearch/bin/elasticsearch &
+	exit
+	curl -XPUT 'http://localhost:9200/index_test/messages/first' -H "Content-Type: application/json" -d '{"name" : "xebia & iot-ee"}'
+
+
 ## Kibana
 
 on subscriber
@@ -86,6 +97,7 @@ on subscriber
 	
 On your local desktop, open a browser and go to 
 
-	192.168.1.21:5601
+	localhost:5601
 
+Verify index "index_test" was created
 
