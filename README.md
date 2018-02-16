@@ -25,13 +25,13 @@ This project enables to run 4 docker containers.
 
 On two of these containers (named `s1-emqtt-io` and `s2-emqtt-io`) we will setup a mqtt cluster. We will also run a wireshark in order to visualize the packets exchanged with clients.
 
-On one of the two others containers (named `publisher`), we will run a publisher to send messages to the mqtt cluster. On the other containers (named `subsciber`) we will run a subscriber with the possibility to persist messages on console or on elasticsearch. With Kibana we will be able to visualize those messages. 
+On one of the two other containers (named `publisher`), we will run a publisher to send messages to the mqtt cluster. On the other containers (named `subsciber`) we will run a subscriber with the possibility to persist messages on console or on elasticsearch. With Kibana we will be able to visualize those messages. 
 
 ## Build the docker image
 
-Execute the script `create_iot_mqtt_docker_image.sh` to create image `iot-mqtt-docker-image:0.0.1`
+Execute the script `create_iot_mqtt_docker_image.sh` to create the image `iot-mqtt-docker-image:0.0.1`.
 
-If you want to delete this image, you can run the script `delete_iot_mqtt_docker_image.sh` 
+If you want to delete this image, you can run the script `delete_iot_mqtt_docker_image.sh`.
 
 ## Setup the EMQTT cluster
 
@@ -63,21 +63,6 @@ on s2-emqtt-io
 
 You should see the message "Hello IoT" display on `s1-emqtt-io`
 
-## Setup publisher and subscriber
-
-On two terminals, execute run_publisher_container.sh and run_subscriber_container.sh. Two containers should be named `publisher` and `subscriber`.
-
-On publisher
-
-	cd /home
-	sh publisher.sh tcp://s2-emqtt-io:1883 iot_data_test
-
-On subscriber
-
-	cd /home
-	/usr/share/elasticsearch/bin/elasticsearch &
-	sh subscriber.sh tcp://s1-emqtt-io:1883 iot_data_test persisters_configuration_file.json
-
 ## Elasticsearch
 
 On subscriber 
@@ -87,7 +72,6 @@ On subscriber
 	./elasticsearch/bin/elasticsearch &
 	exit
 	curl -XPUT 'http://localhost:9200/index_test/messages/first' -H "Content-Type: application/json" -d '{"name" : "xebia & iot-ee"}'
-
 
 ## Kibana
 
@@ -101,3 +85,16 @@ On your local desktop, open a browser and go to
 
 Verify index "index_test" was created
 
+## Setup publisher and subscriber
+
+On two terminals, execute run_publisher_container.sh and run_subscriber_container.sh. Two containers should be named `publisher` and `subscriber`.
+
+On publisher
+
+	cd /home
+	sh publisher.sh tcp://s2-emqtt-io:1883 iot_data_test
+
+On subscriber
+
+	cd /home
+	sh subscriber.sh tcp://s1-emqtt-io:1883 iot_data_test persisters_configuration_file.json
