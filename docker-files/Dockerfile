@@ -9,6 +9,7 @@ RUN yum -y install net-tools
 RUN yum -y install iproute
 RUN yum -y install wireshark-gnome
 RUN yum -y install initscripts
+RUN yum -y install tcpdump
 
 # Install mosquitto
 RUN echo "[home_oojah_mqtt]" >> /etc/yum.repos.d/CentOS-Base.repo
@@ -40,6 +41,7 @@ RUN rm centos7-rpm
 # Copy files
 RUN mkdir -p /home/jars
 COPY modify_emq_conf_file.sh /home/
+COPY persisters_configuration_file.json /home/
 COPY publisher.sh /home/
 COPY subscriber.sh /home/
 COPY jars/* /home/jars/

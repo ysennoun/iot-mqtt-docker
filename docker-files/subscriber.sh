@@ -20,4 +20,4 @@ ConifgFilePath --> $configFilePath
 
 # run publisher
 
-java -cp jar/iot-mqtt-1.0-SNAPSHOT-jar-with-dependencies.jar com.xebia.iot.main.SubscriberMain ${serverUri} ${topic} ${configFilePath}
+java -cp jars/iot-mqtt-1.0-SNAPSHOT-jar-with-dependencies.jar com.xebia.iot.main.SubscriberMain ${serverUri} ${topic} ${configFilePath}

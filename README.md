@@ -69,7 +69,7 @@ On subscriber
 
 	su - elasticuser
 	export JAVA_HOME=/usr/bin/java/jdk1.8.0_161
-	./elasticsearch/bin/elasticsearch &
+	./elasticsearch/bin/elasticsearch > /dev/null 2>&1 &
 	exit
 	curl -XPUT 'http://localhost:9200/index_test/messages/first' -H "Content-Type: application/json" -d '{"name" : "xebia & iot-ee"}'
 
@@ -77,7 +77,7 @@ On subscriber
 
 on subscriber
 
-	/usr/share/kibana/bin/kibana &
+	/usr/share/kibana/bin/kibana > /dev/null 2>&1 &
 	
 On your local desktop, open a browser and go to 
 
@@ -98,3 +98,24 @@ On subscriber
 
 	cd /home
 	sh subscriber.sh tcp://s1-emqtt-io:1883 iot_data_test persisters_configuration_file.json
+
+## HTTP Publisher 
+
+PS: Link followed `https://github.com/emqtt/emqttd/issues/1274`
+
+	curl -v --basic -u admin:public -H "Content-Type: application/json" -d '{"topic": "test","payload": "hello","qos": 1,"retain": false,"client_id": "C_1492145414740"}' -k http://localhost:8080/api/v2/mqtt/publish
+
+## Analysis of network exchange
+
+Let's analyze the packets exchanged between clients and the MQTT cluster. You can execute on `s1-emqtt-io`, the following command:
+
+	tcpdump -w capture_network_exchange.pcap
+
+
+With all methods we have seen, publish and subscribe messages from `s1-emqtt-io`, then retrieve the file `capture_network_exchange.pcap` on your local desktop by executing the command below on a new terminal:
+
+	docker cp <CONTAINER_ID_of_s1-emqtt-io>:/capture_network_exchange.pcap .
+
+The file format `pcap` is readable with wireshark, thus download `wireshark` and open it. Finally, analyse the packet exchanged.
+
+

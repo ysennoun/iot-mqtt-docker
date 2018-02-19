@@ -2,7 +2,7 @@
    "persisters":[
       {
          "type":"elasticsearch",
-         "brokers":"subscriber:9200",
+         "brokers":"localhost:9300",
          "index":"iot_data_test_index"
       },
       {
