@@ -47,8 +47,12 @@ Then on each container
 
 Check that the file `/etc/emqttd/emq.conf` has been changed at the end.
 
+[](images/emq_conf.png)
+
 	emqttd start
 	emqttd_ctl cluster status
+
+[](images/emq_status.png)
 
 ## Test the EMQTT cluster with Mosquitto
 
@@ -63,6 +67,8 @@ on s2-emqtt-io
 	mosquitto_pub -h s1-emqtt-io -t iot_data -m "Hello IoT"
 
 You should see the message "Hello IoT" display on `s1-emqtt-io`
+
+[](images/emq_mosquitto.png)
 
 ## Elasticsearch
 
@@ -86,6 +92,8 @@ On your local desktop, open a browser and go to
 
 Verify index "index_test" was created
 
+[](images/test_elasticsearch.png)
+
 ## Setup publisher and subscriber
 
 On two terminals, execute run_publisher_container.sh and run_subscriber_container.sh. Two containers should be named `publisher` and `subscriber`.
@@ -100,11 +108,17 @@ On subscriber
 	cd /home
 	sh subscriber.sh tcp://s1-emqtt-io:1883 iot_data_test persisters_configuration_file.json
 
+[](images/publish_subscribe.png)
+
 ## HTTP Publisher 
 
 PS: Link followed `https://github.com/emqtt/emqttd/issues/1274`
 
-	curl -v --basic -u admin:public -H "Content-Type: application/json" -d '{"topic": "test","payload": "hello","qos": 1,"retain": false,"client_id": "C_1492145414740"}' -k http://localhost:8080/api/v2/mqtt/publish
+	curl -v --basic -u admin:public -H "Content-Type: application/json" -d '{"topic": "iot_data_test","payload": "hello from POST","qos": 1,"retain": false,"client_id": "C_1492145414740"}' -k http://s1-emqtt-io:8080/api/v2/mqtt/publish
+
+[](images/publish_post.png)
+
+[](images/kibana_results.png)
 
 ## Analysis of network exchange
 
@@ -112,11 +126,13 @@ Let's analyze the packets exchanged between clients and the MQTT cluster. You ca
 
 	tcpdump -w capture_network_exchange.pcap
 
+s1-emqtt-io (192.168.1.10) transmet à s2-emqtt-io (192.168.1.11) le message publier par publisher (192.168.1.20) 
+
 
 With all methods we have seen, publish and subscribe messages from `s1-emqtt-io`, then retrieve the file `capture_network_exchange.pcap` on your local desktop by executing the command below on a new terminal:
 
-	docker cp <CONTAINER_ID_of_s1-emqtt-io>:/capture_network_exchange.pcap .
+	docker cp <CONTAINER_ID_of_s1-emqtt-io>:/home/capture_network_exchange.pcap .
 
 The file format `pcap` is readable with wireshark, thus download `wireshark` and open it. Finally, analyse the packet exchanged.
 
-
+[](images/wireshark.png)

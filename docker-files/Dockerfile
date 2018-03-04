@@ -12,6 +12,9 @@ RUN yum -y install initscripts
 RUN yum -y install tcpdump
 
 # Install mosquitto
+RUN wget dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libwebsockets-1.7.5-1.el7.x86_64.rpm
+RUN rpm -ivh libwebsockets-1.7.5-1.el7.x86_64.rpm
+RUN rm libwebsockets-1.7.5-1.el7.x86_64.rpm
 RUN echo "[home_oojah_mqtt]" >> /etc/yum.repos.d/CentOS-Base.repo
 RUN echo "name=mqtt (CentOS_CentOS-7)" >> /etc/yum.repos.d/CentOS-Base.repo
 RUN echo "type=rpm-md" >> /etc/yum.repos.d/CentOS-Base.repo
