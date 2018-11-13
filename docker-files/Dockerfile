@@ -26,14 +26,14 @@ RUN yum -y install mosquitto
 RUN yum -y install mosquitto-clients
 
 # Install Java
-RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz"
-RUN tar xzf jdk-8u161-linux-x64.tar.gz
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz"
+RUN tar xzf jdk-8u191-linux-x64.tar.gz
 RUN mkdir -p /usr/bin/java/
-RUN mv jdk1.8.0_161 /usr/bin/java/
-RUN rm jdk-8u161-linux-x64.tar.gz
-RUN chown -R root:root /usr/bin/java/jdk1.8.0_161/
-ENV JAVA_HOME=/usr/bin/java/jdk1.8.0_161
-ENV PATH=$PATH:/usr/bin/java/jdk1.8.0_161/bin
+RUN mv jdk1.8.0_191 /usr/bin/java/
+RUN rm jdk-8u191-linux-x64.tar.gz
+RUN chown -R root:root /usr/bin/java/jdk1.8.0_191/
+ENV JAVA_HOME=/usr/bin/java/jdk1.8.0_191
+ENV PATH=$PATH:/usr/bin/java/jdk1.8.0_191/bin
 RUN java -version
 
 # Install EMQTT

@@ -45,10 +45,10 @@ Then on each container
 	cd /home
 	sh modify_emq_conf_file.sh
 
-Check that the file `/etc/emqttd/emq.conf` has been changed at the end.
+Check that the file `/etc/emqx/emqx.conf` has been changed at the end.
 
-	emqttd start
-	emqttd_ctl cluster status
+	emqx start
+	emqx_ctl cluster status
 
 ## Test the EMQTT cluster with Mosquitto
 
@@ -69,7 +69,7 @@ You should see the message "Hello IoT" display on `s1-emqtt-io`
 On subscriber 
 
 	su - elasticuser
-	export JAVA_HOME=/usr/bin/java/jdk1.8.0_161
+	export JAVA_HOME=/usr/bin/java/jdk1.8.0_191
 	./elasticsearch/bin/elasticsearch > /dev/null 2>&1 &
 	exit
 	curl -XPUT 'http://localhost:9200/index_test/messages/first' -H "Content-Type: application/json" -d '{"name" : "xebia & iot-ee"}'
